@@ -50,7 +50,15 @@ class ExtratorURL:
     def __eq__(self, other):
         return self.url == other.url
 
-extrator_url = ExtratorURL(" https://bytebank.com/cambio?moedaOrigem=real&moedaDestino=dolar&quantidade=100")
+    def conversao_moeda(self,valor):
+        if self.get_valor_parametro("moedaOrigem") == "dolar" and self.get_valor_parametro("moedaDestino") == "real":
+            return valor*5.5
+        elif self.get_valor_parametro("moedaOrigem") == "real" and self.get_valor_parametro("moedaDestino") == "dolar":
+            return valor/5.5
+        else:
+            print("Não é possível converter")
+
+extrator_url = ExtratorURL(" https://bytebank.com/cambio?moedaOrigem=dolar&moedaDestino=real&quantidade=100")
 #extrator_url = ExtratorURL(None)
 print(extrator_url.get_valor_parametro("moedaDestino"))
 print("Tamanho: ",len(extrator_url))
@@ -60,3 +68,5 @@ extrator_url2 = ExtratorURL(" https://bytebank.com/cambio?moedaOrigem=real&moeda
 print(extrator_url == extrator_url2)
 
 # digitar dir(str) no console para ver os métodos especiais de str
+
+print(extrator_url.conversao_moeda(100))
