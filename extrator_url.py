@@ -41,6 +41,22 @@ class ExtratorURL:
             valor = self.get_url_parametros()[indice_valor:indice_e_comercial]
         return valor
 
+    def __len__(self):
+        return len(self.url)
+
+    def __str__(self):
+        return self.url
+
+    def __eq__(self, other):
+        return self.url == other.url
+
 extrator_url = ExtratorURL(" https://bytebank.com/cambio?moedaOrigem=real&moedaDestino=dolar&quantidade=100")
 #extrator_url = ExtratorURL(None)
 print(extrator_url.get_valor_parametro("moedaDestino"))
+print("Tamanho: ",len(extrator_url))
+print(extrator_url)
+extrator_url2 = ExtratorURL(" https://bytebank.com/cambio?moedaOrigem=real&moedaDestino=dolar&quantidade=100")
+
+print(extrator_url == extrator_url2)
+
+# digitar dir(str) no console para ver os métodos especiais de str
